@@ -1,5 +1,7 @@
+from math import trunc
+
+
 def menu():
-    while True:
         print("Wybierz opcję:")
         print("1. Importuj studentów z pliku")
         print("2. Dodaj nowego studenta")
@@ -40,19 +42,20 @@ def edit_students(students_list):
   # Ścieżka do pliku TXT
 file_path = 'students.txt'
 students_list = {} #pracujemy na słowniku!!
-wybor = menu()
 
-if wybor == '1':
-    students_list = import_students(file_path)     # importowanie studenta z pliku
-elif wybor == '2':
-    add_student(students_list)        #  dodawanie studenta do listy
-elif wybor == '3':
-    check_students(students_list)       # sprawdzanie obecnosci studenta
-elif wybor == '4':
-    edit_students(students_list)         # edytowanie obecnosci studenta
-elif wybor == '5':
-    export_students(file_path, students_list)
-elif wybor == '6':
-    exit()
-else:
-    print("Błędny wybór")
+while True:
+    wybor = menu()
+    if wybor == '1':
+        students_list = import_students(file_path)     # importowanie studenta z pliku
+    elif wybor == '2':
+        add_student(students_list)        #  dodawanie studenta do listy
+    elif wybor == '3':
+        check_students(students_list)       # sprawdzanie obecnosci studenta
+    elif wybor == '4':
+        edit_students(students_list)         # edytowanie obecnosci studenta
+    elif wybor == '5':
+        export_students(file_path, students_list)
+    elif wybor == '6':
+        exit()
+    else:
+        print("Błędny wybór")
