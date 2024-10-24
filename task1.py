@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 def menu():
         print("Wybierz opcję:")
         print("1. Importuj studentów z pliku")
@@ -70,4 +68,3 @@ while True:
         exit()
     else:
         print("Błędny wybór")
->>>>>>> Stashed changes
