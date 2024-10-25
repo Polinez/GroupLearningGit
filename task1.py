@@ -11,6 +11,7 @@ def menu():
 
 
 def import_students(file_path):
+
     students_list = []
     try:
         with open(file_path, 'r') as file:
@@ -23,15 +24,18 @@ def import_students(file_path):
     return students_list
 
 
+
 def add_student(students_list):
     imie = input("Podaj imię studenta: ")
 
 
 def export_students(file_path, students_list):
+
     with open(file_path, 'w') as file:
         for student in students_list:
             file.write(f"{student[0]},{student[1]}\n")
     print("Lista studentów zapisana pomyślnie.")
+
 
 
 def check_students(students_list):
@@ -50,7 +54,9 @@ def edit_students(students_list):
 
   # Ścieżka do pliku TXT
 file_path = 'students.txt'
+
 students_list = []
+
 
 while True:
     wybor = menu()
@@ -67,4 +73,6 @@ while True:
     elif wybor == '6':
         exit()
     else:
+
         print("Błędny wybór")
+
