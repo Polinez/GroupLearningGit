@@ -27,6 +27,7 @@ def import_students(file_path):
 
 def add_student(students_list):
     imie = input("Podaj imię studenta: ")
+    students_list.append(imie)
 
 
 def export_students(file_path, students_list):
@@ -49,8 +50,9 @@ def check_students(students_list):
 
 
 def edit_students(students_list):
-    pass
-
+    imie = input("Podaj imię studenta: ") #usuniecie studenta
+    students_list.pop(imie)
+    
 
   # Ścieżka do pliku TXT
 file_path = 'students.txt'
