@@ -1,6 +1,3 @@
-from math import trunc
-
-
 def menu():
         print("Wybierz opcję:")
         print("1. Importuj studentów z pliku")
@@ -14,7 +11,18 @@ def menu():
 
 
 def import_students(file_path):
-    pass
+
+    students_list = []
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                student = line.strip().split(',')
+                students_list.append([student[0], student[1] == 'True'])
+            print("Lista studentów zaimportowana pomyślnie.")
+    except FileNotFoundError:
+        print("Plik nie istnieje. Zaczynamy z pustą listą.")
+    return students_list
+
 
 
 def add_student(students_list):
@@ -22,7 +30,12 @@ def add_student(students_list):
 
 
 def export_students(file_path, students_list):
-    pass
+
+    with open(file_path, 'w') as file:
+        for student in students_list:
+            file.write(f"{student[0]},{student[1]}\n")
+    print("Lista studentów zapisana pomyślnie.")
+
 
 
 def check_students(students_list):
@@ -41,7 +54,9 @@ def edit_students(students_list):
 
   # Ścieżka do pliku TXT
 file_path = 'students.txt'
-students_list = {} #pracujemy na słowniku!!
+
+students_list = []
+
 
 while True:
     wybor = menu()
@@ -58,4 +73,6 @@ while True:
     elif wybor == '6':
         exit()
     else:
+
         print("Błędny wybór")
+
