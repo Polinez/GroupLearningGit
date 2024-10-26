@@ -18,7 +18,7 @@ def import_students(file_path):
 
 
 def add_student(students_list):
-    imie = input("Podaj imię studenta: ")
+    pass
 
 
 def export_students(file_path, students_list):
