@@ -35,6 +35,7 @@ def add_student(students_list):
         students_list[imie] = True
         file.write(imie + ",")
     print("Student został dodany pomyślnie")
+    return students_list
 
 def remove_student(file_path, students_list):              #usuwanie studenta
     imie = input("Podaj imię i nazwisko studenta do usunięcia: ")

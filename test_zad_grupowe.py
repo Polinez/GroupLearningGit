@@ -1,6 +1,8 @@
 from unittest.mock import patch, mock_open
 import pytest
-from task1 import edit_students,import_students,add_student,remove_student,export_students,check_students
+from task1 import edit_students, import_students, add_student, remove_student, export_students, check_students, \
+    students_list
+
 
 class TestImportStudents:
     @patch("builtins.open", mock_open(read_data="Jan Kowalski,Anna Nowak"))
@@ -16,9 +18,18 @@ class TestImportStudents:
         assert result == expected
 
 class TestAddStudent:
-    pass
-    #when
-    #add_student()
+    def test_add_students_success(self):
+        # given
+        with patch("builtins.input", return_value="Jan Kowalski"):
+            file_path = "students.txt"
+            students_list={}
+
+            # when
+            result = add_student(students_list)
+
+            # then
+            expected = {"Jan Kowalski": True}
+            assert result == expected
 
 class TestZaznaczObecnosc:
     pass
