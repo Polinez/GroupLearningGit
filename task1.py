@@ -37,16 +37,15 @@ def add_student(students_list):
     print("Student został dodany pomyślnie")
     return students_list
 
-def remove_student(file_path, students_list):              #usuwanie studenta
+def remove_student(students_list):              #usuwanie studenta
     imie = input("Podaj imię i nazwisko studenta do usunięcia: ")
     if imie in students_list:
         students_list.pop(imie)
+        print("Student został usunięty")
     else:
         print("Takiego studenta nie ma w bazie")
-    with open(file_path, "w") as file:
-        for student in students_list.keys():
-            file.write(student + ",")
-    print("Student został usunięty")
+    return students_list
+
 
 def export_students(file_path2, students_list):
     with open(file_path2, "a") as file:
@@ -98,7 +97,7 @@ if __name__ == "__main__":
             obecnosc = input("Czy był obecny? T/N: ")
             edit_students(students_list,imie, obecnosc)         # edytowanie obecnosci studenta
         elif wybor == '5':
-            remove_student(file_lista_studentow, students_list)       #usuwanie studenta
+            remove_student(students_list)       #usuwanie studenta
         elif wybor == '6':
             export_students(file_obecnosc, students_list)      #zapisywanie obecnosci do pliku
         elif wybor == '7':

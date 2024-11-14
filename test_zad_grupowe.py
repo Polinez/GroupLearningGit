@@ -1,7 +1,6 @@
 from unittest.mock import patch, mock_open
 import pytest
-from task1 import edit_students, import_students, add_student, remove_student, export_students, check_students, \
-    students_list
+from task1 import edit_students, import_students, add_student, remove_student, export_students, check_students
 
 
 class TestImportStudents:
@@ -32,9 +31,17 @@ class TestAddStudent:
             assert result == expected
 
 class TestZaznaczObecnosc:
-    pass
-    #when
-    #check_students()
+    def test_check_students_present(self):
+        # given
+        students = {"Jan Kowalski": False, "Sebastian Wandzel": False}
+
+        # when
+        with patch("builtins.input", side_effect=["T", "T"]):
+            check_students(students)
+
+        # then
+        assert students["Jan Kowalski"] == True
+        assert students["Sebastian Wandzel"] == True
 
 class TestObecnosci:
     def test_edit_students(self):
@@ -60,9 +67,15 @@ class TestObecnosci:
         assert students_list[imie] == False
 
 class TestDeleteStudents:
-    pass
-    #when
-    #remove_student()
+    def test_removestudent(self):
+        #Given
+        students_lists={"Sebastian":True,"Jan Kowalski":False}
+
+        #When
+        with patch("builtins.input", side_effect=["Sebastian"]):
+            remove_student(students_lists)
+        #Then
+        assert students_lists == {"Jan Kowalski": False}
 
 class TestExportStudents:
     pass
