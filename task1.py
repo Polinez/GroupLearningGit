@@ -49,12 +49,12 @@ def remove_student(students_list):              #usuwanie studenta
 
 def export_students(file_path2, students_list):
     with open(file_path2, "a") as file:
-        file.write(str(datetime.now()) + "\n")          #zapisywanie obecnosci studentow do pliku
+        file.write(str(datetime.now().day)+" "+str(datetime.now().month)+" "+str(datetime.now().year) + "\n")          #zapisywanie obecnosci studentow do pliku
         for student, attendance in students_list.items():
             if attendance == True:
-                file.write(f"{student:30} - obecny\n")
+                file.write(f"{student} - obecny\n")
             else:
-                file.write(f"{student:30} - nieobecny\n")
+                file.write(f"{student} - nieobecny\n")
     print("Lista studentów zapisana pomyślnie.")
 
 

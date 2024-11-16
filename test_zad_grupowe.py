@@ -1,6 +1,8 @@
+from datetime import datetime
 from unittest.mock import patch, mock_open
 import pytest
-from task1 import edit_students, import_students, add_student, remove_student, export_students, check_students
+from task1 import edit_students, import_students, add_student, remove_student, export_students, check_students, \
+    students_list
 
 
 class TestImportStudents:
@@ -16,7 +18,23 @@ class TestImportStudents:
         expected = {"Jan Kowalski": True, "Anna Nowak": True}
         assert result == expected
 
-class TestAddStudent:
+class TestExportStudents:
+    @patch("builtins.open", new_callable=mock_open)
+    def test_export_students(self,mock_file):
+        # given
+        file_path = "studentsAttendance.txt"
+        students_list={"Jan Kowalski": True, "Anna Nowak": False}
+        current_date = f"{str(datetime.now().day)} {str(datetime.now().month)} {str(datetime.now().year)}"
+
+        # when
+        export_students(file_path,students_list)
+
+        # then
+        mock_file().write.assert_any_call(f"{current_date}\n")
+        mock_file().write.assert_any_call("Jan Kowalski - obecny\n")
+        mock_file().write.assert_any_call("Anna Nowak - nieobecny\n")
+
+class TestONStudents:
     def test_add_students_success(self):
         # given
         with patch("builtins.input", return_value="Jan Kowalski"):
@@ -30,7 +48,17 @@ class TestAddStudent:
             expected = {"Jan Kowalski": True}
             assert result == expected
 
-class TestZaznaczObecnosc:
+    def test_removestudent(self):
+        #Given
+        students_lists={"Sebastian":True,"Jan Kowalski":False}
+
+        #When
+        with patch("builtins.input", side_effect=["Sebastian"]):
+            remove_student(students_lists)
+        #Then
+        assert students_lists == {"Jan Kowalski": False}
+
+class TestONApsents:
     def test_check_students_present(self):
         # given
         students = {"Jan Kowalski": False, "Sebastian Wandzel": False}
@@ -43,7 +71,6 @@ class TestZaznaczObecnosc:
         assert students["Jan Kowalski"] == True
         assert students["Sebastian Wandzel"] == True
 
-class TestObecnosci:
     def test_edit_students(self):
         # Given
         students_list = {}
@@ -66,18 +93,4 @@ class TestObecnosci:
         # Then
         assert students_list[imie] == False
 
-class TestDeleteStudents:
-    def test_removestudent(self):
-        #Given
-        students_lists={"Sebastian":True,"Jan Kowalski":False}
 
-        #When
-        with patch("builtins.input", side_effect=["Sebastian"]):
-            remove_student(students_lists)
-        #Then
-        assert students_lists == {"Jan Kowalski": False}
-
-class TestExportStudents:
-    pass
-    #when
-    #export_students()
