@@ -37,24 +37,24 @@ class TestExportStudents:
 class TestONStudents:
     def test_add_students_success(self):
         # given
-        with patch("builtins.input", return_value="Jan Kowalski"):
-            file_path = "students.txt"
-            students_list={}
+        file_path = "students.txt"
+        imie = "Jan Kowalski"
+        students_list={}
 
-            # when
-            result = add_student(students_list)
+        # when
+        result = add_student(students_list,imie)
 
-            # then
-            expected = {"Jan Kowalski": True}
-            assert result == expected
+        # then
+        expected = {"Jan Kowalski": True}
+        assert result == expected
 
     def test_removestudent(self):
         #Given
+        imie="Sebastian"
         students_lists={"Sebastian":True,"Jan Kowalski":False}
 
         #When
-        with patch("builtins.input", side_effect=["Sebastian"]):
-            remove_student(students_lists)
+        remove_student(students_lists,imie)
         #Then
         assert students_lists == {"Jan Kowalski": False}
 

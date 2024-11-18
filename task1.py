@@ -29,16 +29,14 @@ def import_students(file_path):
         print("Plik nie istnieje. Zaczynamy z pustą listą.")
     return students_list
 
-def add_student(students_list):
+def add_student(students_list,imie):
     with open(file_lista_studentow, "a") as file:          #dodawanie studenta
-        imie = input("Podaj imię i nazwisko studenta do dodania: ")
         students_list[imie] = True
         file.write(imie + ",")
     print("Student został dodany pomyślnie")
     return students_list
 
-def remove_student(students_list):              #usuwanie studenta
-    imie = input("Podaj imię i nazwisko studenta do usunięcia: ")
+def remove_student(students_list,imie):              #usuwanie studenta
     if imie in students_list:
         students_list.pop(imie)
         print("Student został usunięty")
@@ -48,7 +46,7 @@ def remove_student(students_list):              #usuwanie studenta
 
 
 def export_students(file_path2, students_list):
-    with open(file_path2, "a") as file:
+    with open(file_path2, "a") as file: # "a" oznacza tryb dopisywania na koniec (append) do pliku
         file.write(str(datetime.now().day)+" "+str(datetime.now().month)+" "+str(datetime.now().year) + "\n")          #zapisywanie obecnosci studentow do pliku
         for student, attendance in students_list.items():
             if attendance == True:
@@ -71,7 +69,7 @@ def check_students(students_list):
 
 
 
-def edit_students(students_list,imie:str,obecnosc:str):
+def edit_students(students_list:dict,imie:str,obecnosc:str):
     if obecnosc.upper() == 'T':
         students_list.update({imie : True})
     else:
@@ -89,7 +87,8 @@ if __name__ == "__main__":
         if wybor == '1':
             students_list = import_students(file_lista_studentow)    # importowanie studenta z pliku
         elif wybor == '2':
-            add_student(students_list)        #  dodawanie studenta do listy
+            imie = input("Podaj imię i nazwisko studenta do dodania: ")
+            add_student(students_list,imie)        #  dodawanie studenta do listy
         elif wybor == '3':
             check_students(students_list)       # sprawdzanie obecnosci studenta
         elif wybor == '4':
@@ -97,7 +96,8 @@ if __name__ == "__main__":
             obecnosc = input("Czy był obecny? T/N: ")
             edit_students(students_list,imie, obecnosc)         # edytowanie obecnosci studenta
         elif wybor == '5':
-            remove_student(students_list)       #usuwanie studenta
+            imie = input("Podaj imię i nazwisko studenta do usunięcia: ")
+            remove_student(students_list,imie)       #usuwanie studenta
         elif wybor == '6':
             export_students(file_obecnosc, students_list)      #zapisywanie obecnosci do pliku
         elif wybor == '7':
