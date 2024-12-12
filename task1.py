@@ -83,7 +83,7 @@ def edit_students(students_list: dict, name: str, presence: str):
 
 if __name__ == "__main__":
     # Path to files
-    file_students = 'students.txt'  # List of students' names
+    file_students = 'lists/students.txt'  # List of students' names
     file_attendance = 'studentsAttendance.txt'  # File where students' attendance will be saved
     students_list = {}
 
