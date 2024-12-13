@@ -1,0 +1,11 @@
+name: "Run TODO to Issue"
+on:
+  - push  # Możesz dodać inne zdarzenia, takie jak pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4  # Pobranie kodu z repozytorium
+      - name: "TODO to Issue"
+        uses: alstr/todo-to-issue-action@v5  # Użycie akcji
