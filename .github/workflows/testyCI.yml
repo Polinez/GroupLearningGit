@@ -3,7 +3,7 @@ name: First CI
 on:
   push:
     branches:
-      - main
+      - '*'
 
 
 jobs:
@@ -22,6 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt 
+        pip install pytest-cov  
 
     - name: Run tests with coverage
       run: |
