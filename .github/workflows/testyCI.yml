@@ -4,33 +4,26 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
+permissions: read-all
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Downloading repository
+    - name: "Downloading repository"
       uses: actions/checkout@v3
 
-    - name: Set up Python
+    - name: "Set up Python"
       uses: actions/setup-python@v4
       with:
         python-version: '3.13'
 
-    - name: Install dependencies
+    - name: "Install dependencies"
       run: |
         pip install -r requirements.txt 
         pip install pytest-cov  
-
-    - name: Run tests with coverage
-      run: |
-        pytest --cov=.  --cov-report=xml:coverage/coverage.xml tests
-
-    - name: Show coverage report
-      run: |
-        coverage report  
+        
+    - name: "Run tests with coverage"
+      run: pytest -vv --cov=. tests
