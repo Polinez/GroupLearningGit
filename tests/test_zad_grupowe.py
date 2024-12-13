@@ -69,7 +69,6 @@ class TestExportStudents:
 class TestAddStudents:
     def test_add_students_success(self):
         # given
-        file_path = "../students.txt"
         imie = "Jan Kowalski"
         students_list={}
 
@@ -82,7 +81,6 @@ class TestAddStudents:
 
     def test_add_students_empty_name(self):
         # given
-        file_path = "../students.txt"
         imie = ""
         students_list = {}
 
@@ -92,7 +90,6 @@ class TestAddStudents:
 
     def test_add_students_single_name_value(self):
         # given
-        file_path = "../students.txt"
         imie = "Jan"
         students_list = {}
 

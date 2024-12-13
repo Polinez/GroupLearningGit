@@ -61,4 +61,9 @@ jobs:
           VALIDATE_PYTHON_RUFF: true
           CACHE_DIR: .cache/super-linter
 
+      - name: "Display linter results"
+        run: |
+          cat super-linter-output/super-linter-summary.md
+
+
 
