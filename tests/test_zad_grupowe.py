@@ -3,7 +3,6 @@ from unittest.mock import patch, mock_open
 import pytest
 from task1 import edit_students, import_students, add_student, remove_student, export_students, check_students
 
-# TODO: make everything work on pytest
 class TestImportStudents:
     @patch("builtins.open", mock_open(read_data="Jan Kowalski,Anna Nowak"))
     def test_import_students_success(self):

@@ -81,7 +81,7 @@ def edit_students(students_list: dict, name: str, presence: str):
         raise Exception("Invalid input, please edit later.")
 
 # TODO: Go to sleep after CI test <3
-# todo: test
+
 if __name__ == "__main__":
     # Path to files
     file_students = 'students.txt'  # List of students' names
