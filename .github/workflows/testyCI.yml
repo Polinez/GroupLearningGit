@@ -31,15 +31,21 @@ jobs:
   inter:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
+
     steps:
-      - name: Checkout code
+      - name: "Downloading repository"
         uses: actions/checkout@v4
         with:
           # super-linter needs the full git history to get the
           # list of files that changed across commits
           fetch-depth: 0
 
-      - name: Cache super-linter
+      - name: "Cache super-linter"
         uses: actions/cache@v3
         with:
           path: .cache/super-linter
@@ -47,8 +53,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-super-linter-
 
-      - name: Super-Linter
-        uses: super-linter/super-linter/slim@v7.1.0
+      - name: "Super-Linter"
+        uses: super-linter/super-linter@v7.2.1
         env:
           # To report GitHub Actions status checks
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
