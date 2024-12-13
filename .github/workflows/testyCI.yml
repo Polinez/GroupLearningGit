@@ -1,7 +1,7 @@
 name: First CI
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -27,3 +27,43 @@ jobs:
         
     - name: "Run tests with coverage"
       run: pytest -vv --cov=. tests
+
+  inter:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
+
+    steps:
+      - name: "Downloading repository"
+        uses: actions/checkout@v4
+        with:
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
+
+      - name: "Cache super-linter"
+        uses: actions/cache@v3
+        with:
+          path: .cache/super-linter
+          key: ${{ runner.os }}-super-linter-${{ hashFiles('**/*.py') }} # Cache the linter to speed up the process after the first run
+          restore-keys: |
+            ${{ runner.os }}-super-linter-
+
+      - name: "Super-Linter"
+        uses: super-linter/super-linter/slim@v7.1.0
+        env:
+          # To report GitHub Actions status checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_PYTHON_RUFF: true
+          CACHE_DIR: .cache/super-linter
+
+      - name: "Display linter results"
+        run: |
+          cat super-linter-output/super-linter-summary.md
+
+
+

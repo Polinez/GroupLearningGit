@@ -69,7 +69,6 @@ class TestExportStudents:
 class TestAddStudents:
     def test_add_students_success(self):
         # given
-        file_path = "../students.txt"
         imie = "Jan Kowalski"
         students_list={}
 
@@ -82,7 +81,6 @@ class TestAddStudents:
 
     def test_add_students_empty_name(self):
         # given
-        file_path = "../students.txt"
         imie = ""
         students_list = {}
 
@@ -92,7 +90,6 @@ class TestAddStudents:
 
     def test_add_students_single_name_value(self):
         # given
-        file_path = "../students.txt"
         imie = "Jan"
         students_list = {}
 
@@ -130,8 +127,8 @@ class TestCheckStudents:
             check_students(students)
 
         # then
-        assert students["Jan Kowalski"] == True
-        assert students["Sebastian Wandzel"] == True
+        assert students["Jan Kowalski"]
+        assert students["Sebastian Wandzel"]
 
     def test_check_students_absent(self):
         # given
@@ -142,8 +139,8 @@ class TestCheckStudents:
             check_students(students)
 
         # then
-        assert students["Jan Kowalski"] == False
-        assert students["Sebastian Wandzel"] == False
+        assert not students["Jan Kowalski"]
+        assert not students["Sebastian Wandzel"]
 
     def test_check_students_invalid_input(self):
         # given
@@ -164,7 +161,7 @@ class TestEditStudents:
         edit_students(students_list, imie, obecnosc)
 
         # Then
-        assert students_list[imie] == True
+        assert students_list[imie]
 
     def test_edit_students_nieobecny(self):
         # Given
@@ -175,7 +172,7 @@ class TestEditStudents:
         edit_students(students_list, imie, obecnosc)
 
         # Then
-        assert students_list[imie] == False
+        assert not students_list[imie]
 
     def test_edit_students_invalid_input(self):
         # given
