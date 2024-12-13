@@ -72,17 +72,34 @@ jobs:
     steps:
       - uses: "actions/checkout@v4"
         with:
-            fetch-depth: 0
+          fetch-depth: 0
+
+      # Debugging step to print out DIFF_URL value
+      - name: "Debug DIFF_URL"
+        run:
+          echo "DIFF_URL: ${{ secrets.DIFF_URL }}"
+
       - name: "TODO to Issue"
         uses: "alstr/todo-to-issue-action@v5"
         with:
           INSERT_ISSUE_URLS: "true"
           CLOSE_ISSUES: "true"
           AUTO_ASSIGN: "true"
+          REPO: "Polinez/GroupLearningGit" # Ensure the correct repository name is set
+          BEFORE: "028ea725ce9b460263a22e21e702c6e3a14929d9" # Ensure this is the correct commit hash
+          DIFF_URL: "https://github.com/Polinez/GroupLearningGit/pull/22.diff" # Full URL for diff
+          SHA: "f1cfe956baea54c32150e8e57a10ef8ad5d5524e" # Correct SHA for the commit
+          GITHUB_URL: "https://api.github.com" # API URL (should be correct)
+          GITHUB_SERVER_URL: "https://github.com" # Server URL (should be correct)
+          ESCAPE: "true"
+          AUTO_P: "true"
+          ACTOR: "Polinez"
+
       - name: Set Git user
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Commit and Push Changes
         run: |
           git add -A
