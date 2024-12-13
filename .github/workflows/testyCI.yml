@@ -106,8 +106,5 @@ jobs:
       - name: Create Issues ✔️
         uses: kevinsawade/python-todo-to-issue@latest
         with:
-          # GitHub Bot will open the issues:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Provide a custom secret
-          # TOKEN: ${{ secrets.CUSTOM_ISSUE_TOKEN }}
 
