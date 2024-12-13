@@ -66,30 +66,48 @@ jobs:
           cat super-linter-output/super-linter-summary.md
 
 
-  todo-to-issue:
-    runs-on: "ubuntu-latest"
-    steps:
-      - uses: "actions/checkout@v4"
-        with:
-            fetch-depth: 0
-      - name: "TODO to Issue"
-        uses: "alstr/todo-to-issue-action@v5"
-        with:
-          INSERT_ISSUE_URLS: "true"
-          CLOSE_ISSUES: "true"
-          AUTO_ASSIGN: "true"
-      - name: Set Git user
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      - name: Commit and Push Changes
-        run: |
-          git add -A
-          if [[ `git status --porcelain` ]]; then
-            git commit -m "Automatically added GitHub issue links to TODOs"
-            git push origin main
-          else
-            echo "No changes to commit"
-          fi
+#  todo-to-issue:
+#    runs-on: "ubuntu-latest"
+#    steps:
+#      - uses: "actions/checkout@v4"
+#        with:
+#            fetch-depth: 0
+#      - name: "TODO to Issue"
+#        uses: "alstr/todo-to-issue-action@v5"
+#        with:
+#          INSERT_ISSUE_URLS: "true"
+#          CLOSE_ISSUES: "true"
+#          AUTO_ASSIGN: "true"
+#      - name: Set Git user
+#        run: |
+#          git config --global user.name "github-actions[bot]"
+#          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+#      - name: Commit and Push Changes
+#        run: |
+#          git add -A
+#          if [[ `git status --porcelain` ]]; then
+#            git commit -m "Automatically added GitHub issue links to TODOs"
+#            git push origin main
+#          else
+#            echo "No changes to commit"
+#          fi
 
+  todo-to-issue:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Create Issues ✔️
+        uses: kevinsawade/python-todo-to-issue@latest
+        with:
+          # GitHub Bot will open the issues:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Provide a custom secret
+          # TOKEN: ${{ secrets.CUSTOM_ISSUE_TOKEN }}
 
