@@ -3,7 +3,10 @@ name: First CI
 on:
   push:
     branches:
-      - '*'
+      - main
+  pull_request:
+    branches:
+      - main
 
 
 jobs:
@@ -26,10 +29,8 @@ jobs:
 
     - name: Run tests with coverage
       run: |
-        pytest --cov=ZadanieGrupowe tests 
+        pytest --cov=ZadanieGrupowe  --cov-report=xml:coverage/coverage.xml
 
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v3
-      with:
-        name: coverage-report
-        path: coverage.xml
+    - name: Show coverage report
+      run: |
+        coverage report  
