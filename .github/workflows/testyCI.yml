@@ -49,7 +49,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .cache/super-linter
-          key: ${{ runner.os }}-super-linter-${{ hashFiles('**/*.py') }} # Cache the linter to speed up the process after the first run
+          key: ${{ runner.os }}-super-linter-${{ hashFiles('**/*.py') }}
           restore-keys: |
             ${{ runner.os }}-super-linter-
 
@@ -72,11 +72,11 @@ jobs:
     steps:
       - uses: "actions/checkout@v4"
         with:
-          fetch-depth: 0
+            fetch-depth: 0
 
       # Debugging step to print out DIFF_URL value
       - name: "Debug DIFF_URL"
-        run:
+        run: |
           echo "DIFF_URL: ${{ secrets.DIFF_URL }}"
 
       - name: "TODO to Issue"
