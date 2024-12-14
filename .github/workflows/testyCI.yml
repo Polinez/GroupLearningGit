@@ -31,18 +31,13 @@ jobs:
         pip install pytest-cov  
         
     - name: "Run tests with coverage"
-      run: pytest -vv --cov=. tests
+      run: pytest -vv --cov=task1.py tests
 
   inter:
     runs-on: ubuntu-latest
 
     permissions:
-#      contents: read
-#      packages: read
-      # To report GitHub Actions status checks
-#      statuses: write
-
-      contents: write     
+      contents: write
       pull-requests: write
       issues: write
       statuses: write
@@ -83,19 +78,21 @@ jobs:
           ruff format --diff --check .
         continue-on-error: true
 
-      - name: "Run Ruff Formatter (Fix mode)"
-        if: ${{ steps.ruff_check.outcome == 'failure' }}
-        run: |
-          ruff format .
 
-      - name: "Commit and push changes"
-        if: ${{ steps.ruff_check.outcome == 'failure' }}
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git add .
-          git commit -m "Automated code formatting by Ruff"
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.head_ref }}
+# Uncoment when i wanna auto fix code
+#      - name: "Run Ruff Formatter (Fix mode)"
+#        if: ${{ steps.ruff_check.outcome == 'failure' }}
+#        run: |
+#          ruff format .
+#
+#      - name: "Commit and push changes"
+#        if: ${{ steps.ruff_check.outcome == 'failure' }}
+#        run: |
+#          git config --global user.name "github-actions"
+#          git config --global user.email "github-actions@github.com"
+#          git add .
+#          git commit -m "Automated code formatting by Ruff"
+#          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.head_ref }}
 
       - name: "Display linter results"
         run: |
