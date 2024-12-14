@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 def menu():
     print("Choose an option:")
     print("1. Import students from file")
