@@ -75,7 +75,7 @@ jobs:
       - name: "Run Ruff Formatter (Check mode)"
         id: ruff_check
         run: |
-          ruff format --diff --check .
+          ruff format --diff --check --color .
         continue-on-error: true
 
       - name: "Run Ruff Formatter (Fix mode)"
@@ -90,9 +90,31 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git add .
           git commit -m "Automated code formatting by Ruff"
-          git push origin HEAD:${{ github.head_ref }}
-      
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.head_ref }}
 
       - name: "Display linter results"
         run: |
           cat super-linter-output/super-linter-summary.md
+
+
+  todo_to_issue:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - name: "TODO to Issue"
+        uses: "alstr/todo-to-issue-action@v5"
+        with:
+          INSERT_ISSUE_URLS: "true"
+      - name: Set Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Commit and Push Changes
+        run: |
+          git add -A
+          if [[ `git status --porcelain` ]]; then
+            git commit -m "Automatically added GitHub issue links to TODOs"
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
