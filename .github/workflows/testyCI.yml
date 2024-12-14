@@ -46,6 +46,11 @@ jobs:
           # list of files that changed across commits
           fetch-depth: 0
 
+      - name: "Install dependencies"
+        run: |
+          pip install -r requirements.txt 
+          pip install ruff
+
       - name: "Cache super-linter"
         uses: actions/cache@v3
         with:
@@ -61,6 +66,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_PYTHON_RUFF: true
           CACHE_DIR: .cache/super-linter
+
+
+      - name: "Run Ruff Formatter (Check mode)"
+        run: |
+          ruff format --check .
+        continue-on-error: true
+
+      - name: "Run Ruff Formatter (Fix mode)"
+        if: ${{ failure() }}
+        run: |
+          ruff format .
 
       - name: "Display linter results"
         run: |
