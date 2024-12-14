@@ -37,9 +37,14 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
-      packages: read
+#      contents: read
+#      packages: read
       # To report GitHub Actions status checks
+#      statuses: write
+
+      contents: write     
+      pull-requests: write
+      issues: write
       statuses: write
 
     steps:
@@ -75,7 +80,7 @@ jobs:
       - name: "Run Ruff Formatter (Check mode)"
         id: ruff_check
         run: |
-          ruff format --diff --check --color .
+          ruff format --diff --check .
         continue-on-error: true
 
       - name: "Run Ruff Formatter (Fix mode)"
