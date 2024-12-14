@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
+
 
 
 permissions: read-all
@@ -78,6 +82,15 @@ jobs:
         if: ${{ steps.ruff_check.outcome == 'failure' }}
         run: |
           ruff format .
+
+      - name: "Commit and push changes"
+        if: ${{ steps.ruff_check.outcome == 'failure' }}
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "Automated code formatting by Ruff"
+          git push origin ${{ github.head_ref }}
 
       - name: "Display linter results"
         run: |
