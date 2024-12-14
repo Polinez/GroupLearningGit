@@ -4,6 +4,10 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
+
 
 
 permissions: read-all
@@ -74,6 +78,7 @@ jobs:
           ruff format --diff --check .
         continue-on-error: true
 
+
       - name: "Run Ruff Formatter (Fix mode)"
         if: ${{ steps.ruff_check.outcome == 'failure' }}
         run: |
@@ -88,6 +93,9 @@ jobs:
           git commit -m "Automated code formatting by Ruff"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.head_ref }}
 
+
       - name: "Display linter results"
         run: |
           cat super-linter-output/super-linter-summary.md
+
+
