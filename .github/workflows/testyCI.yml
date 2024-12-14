@@ -71,6 +71,7 @@ jobs:
       - name: "Run Ruff Formatter (Check mode)"
         run: |
           ruff format --check .
+          ruff format --diff
         continue-on-error: true
 
       - name: "Run Ruff Formatter (Fix mode)"

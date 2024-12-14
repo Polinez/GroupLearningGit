@@ -1,19 +1,5 @@
 from datetime import datetime
 
-def testDEF(
-    rawsock, protocol, sslcontext, waiter=None,
-    *, server_side=False, server_hostname=None,
-    extra=None, server=None,
-    ssl_handshake_timeout=None,
-    call_connection_made=True):
-    '''Make an SSL transport.'''
-    if waiter is None:
-     pass
-
-    if extra is None:
-      extra = {}
-
-
 def menu():
     print("Choose an option:")
     print("1. Import students from file")
