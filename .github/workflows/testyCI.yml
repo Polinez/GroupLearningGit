@@ -27,15 +27,15 @@ jobs:
         pip install pytest-cov  
         
     - name: "Run tests with coverage"
-      run: pytest -vv --cov=. tests
+      run: pytest -vv --cov=task1.py tests
 
   inter:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: read
-      packages: read
-      # To report GitHub Actions status checks
+      contents: write
+      pull-requests: write
+      issues: write
       statuses: write
 
     steps:
@@ -45,6 +45,11 @@ jobs:
           # super-linter needs the full git history to get the
           # list of files that changed across commits
           fetch-depth: 0
+
+      - name: "Install dependencies"
+        run: |
+          pip install -r requirements.txt 
+          pip install ruff
 
       - name: "Cache super-linter"
         uses: actions/cache@v3
@@ -61,6 +66,27 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_PYTHON_RUFF: true
           CACHE_DIR: .cache/super-linter
+
+
+      - name: "Run Ruff Formatter (Check mode)"
+        id: ruff_check
+        run: |
+          ruff format --diff --check .
+        continue-on-error: true
+
+      - name: "Run Ruff Formatter (Fix mode)"
+        if: ${{ steps.ruff_check.outcome == 'failure' }}
+        run: |
+          ruff format .
+
+      - name: "Commit and push changes"
+        if: ${{ steps.ruff_check.outcome == 'failure' }}
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "Automated code formatting by Ruff"
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.head_ref }}
 
       - name: "Display linter results"
         run: |
