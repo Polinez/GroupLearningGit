@@ -69,13 +69,14 @@ jobs:
 
 
       - name: "Run Ruff Formatter (Check mode)"
+        id: ruff_check
         run: |
           ruff format --check .
           ruff format --diff
         continue-on-error: true
 
       - name: "Run Ruff Formatter (Fix mode)"
-        if: ${{ failure() }}
+        if: ${{ steps.ruff_check.outcome == 'failure' }}
         run: |
           ruff format .
 
