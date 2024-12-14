@@ -90,7 +90,8 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git add .
           git commit -m "Automated code formatting by Ruff"
-          git push origin ${{ github.head_ref }}
+          git push origin HEAD:${{ github.head_ref }}
+      
 
       - name: "Display linter results"
         run: |
