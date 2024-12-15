@@ -25,5 +25,6 @@ In this task, I learned how to use GitHub Actions to automate various processes,
 
 ---
 
-Feel free to explore the repository and see the progress I've made!
+Feel free to explore the repository and check out the progress I've made!
+
 I know this could have been done with fewer commits, but some parts of the learning process required a bit of trial and error. 😉
