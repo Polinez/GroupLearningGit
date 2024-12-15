@@ -87,10 +87,3 @@ jobs:
           git add .
           git commit -m "Automated code formatting by Ruff"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.head_ref }}
-
-
-      - name: "Display linter results"
-        run: |
-          cat super-linter-output/super-linter-summary.md
-
-
