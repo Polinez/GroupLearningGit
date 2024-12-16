@@ -28,7 +28,8 @@ jobs:
     - name: "Run tests with coverage"
       run: pytest -vv --cov=task1 tests
 
-  inter:
+  linter:
+    needs: test
     runs-on: ubuntu-latest
 
     permissions:
@@ -87,3 +88,29 @@ jobs:
           git add .
           git commit -m "Automated code formatting by Ruff"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.head_ref }}
+  
+
+  todo_to_issue:
+    needs: linter
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - name: "TODO to Issue"
+        uses: "alstr/todo-to-issue-action@v5"
+        with:
+          INSERT_ISSUE_URLS: "true"
+          CLOSE_ISSUES: 'true'
+          AUTO_ASSIGN: 'true'
+      - name: Set Git user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Commit and Push Changes
+        run: |
+          git add -A
+          if [[ `git status --porcelain` ]]; then
+            git commit -m "Automatically added GitHub issue links to TODOs"
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi
