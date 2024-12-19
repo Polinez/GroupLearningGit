@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 
@@ -91,9 +92,9 @@ def edit_students(students_list: dict, name: str, presence: str):
 # TODO: Go to sleep after this ;)
 if __name__ == "__main__":
     # Path to files
-    file_students = "students.txt"  # List of students' names
+    file_students = "src"+os.sep+"students.txt"  # List of students' names
     file_attendance = (
-        "listOfStudents.txt"  # File where students' attendance will be saved
+        "src"+os.sep+"listOfStudents.txt"  # File where students' attendance will be saved
     )
     students_list = {}
 
