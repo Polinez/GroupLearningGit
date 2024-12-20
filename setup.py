@@ -22,7 +22,7 @@ setup(
     install_requires=required_packages,  # requirements from requirements.txt
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Intended Audience :: Teachers",
+        "Intended Audience :: Education",
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.13",
