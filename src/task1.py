@@ -90,7 +90,7 @@ def edit_students(students_list: dict, name: str, presence: str):
 
 
 # TODO: Go to sleep after this ;)
-if __name__ == "__main__":
+def main():
     # Path to files
     file_students = "src"+os.sep+"students.txt"  # List of students' names
     file_attendance = (
@@ -136,3 +136,7 @@ if __name__ == "__main__":
             exit()  # Exit the program
         else:
             print("Invalid choice")
+
+
+if __name__ == "__main__":
+    main()
