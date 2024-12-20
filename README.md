@@ -16,12 +16,18 @@ We worked in teams of four to learn how to:
 ### ✅ Unit Tests 
 For this task, we worked individually. We wrote unit tests for our previous code using `pytest`, which helped us understand the importance of testing in software development.
 
-### ⚙️ CI/CD 
+### ⚙️ CI
 In this task, I learned how to use GitHub Actions to automate various processes, including:
 - 🚀 Running unit tests with coverage on pull requests,  
 - ✨ Using **Super-Linter** to enforce clean and consistent code,  
 - 🔄 Automating Python code formatting with `ruff` and committing corrections, and  
 - 📋 Automatically converting TODO comments into issues in the GitHub Issues tab.
+
+### ⚙️ CD
+In this task, I learned how to deploy my app to PyPI, including:
+- 🔑 Adding the API key to my repository,
+- 🛠️ Creating a **setup.py** file to configure deployment,
+- 🤖 creating a **deploymentCD.yml** to automate deployment process
 
 ---
 
