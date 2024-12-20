@@ -1,0 +1,53 @@
+ame: Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-test' # To upload to TestPyPI
+      - 'v[0-9]+.[0-9]+.[0-9]+'  # To upload do PYPI
+      #- 'v[0-9]+\.[0-9]+\.[0-9]+(-test)?' # i liked more this regex above to divede them
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Extract version from Github tag # extract version from the tag and save it to the environment variable
+      id: get_version
+      run: |
+        # Remove 'v' prefix and '-test' suffix
+        TAG=${GITHUB_REF#refs/tags/v}
+        VERSION=${TAG%-test}
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install setuptools wheel twine
+
+    - name: Build distribution
+      run: python setup.py sdist bdist_wheel  # build the distribution on
+      env:
+        PACKAGE_VERSION: ${{ env.VERSION }}
+
+    - name: Publish to TestPyPI
+      if: contains(github.ref, '-test')  # Only runs for tags with '-test'
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.TEST_PYPI }}
+      run: twine upload --repository testpypi dist/* --verbose # upload the distribution to TestPyPI
+
+    # We won't publish to PyPi this app
+    #- name: Publish to PyPI
+    #  if: ${{ !contains(github.ref, '-test') }}  # Only runs for tags without '-test'
+    #  env:
+    #    TWINE_USERNAME: __token__
+    #    TWINE_PASSWORD: ${{ secrets.PYPI }}
+    #  run: twine upload dist/* --verbose

@@ -1,7 +1,7 @@
 from datetime import datetime
 from unittest.mock import patch, mock_open
 import pytest
-from task1 import (
+from src.task1 import (
     edit_students,
     import_students,
     add_student,
@@ -15,7 +15,7 @@ class TestImportStudents:
     @patch("builtins.open", mock_open(read_data="Jan Kowalski,Anna Nowak"))
     def test_import_students_success(self):
         # given
-        file_path = "../students.txt"
+        file_path = "../src/students.txt"
         students_list = {}
 
         # when
