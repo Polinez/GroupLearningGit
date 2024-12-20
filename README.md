@@ -1,6 +1,7 @@
 # 🐍 Learning Git with Python 
 
 ![🚦 Workflow Status](https://github.com/Polinez/GroupLearningGit/actions/workflows/testyCI.yml/badge.svg)
+[![TestPyPI Version](https://img.shields.io/pypi/v/GroupLearningGit.svg)](https://test.pypi.org/project/GroupLearningGit/0.0.3/)
 
 This project was created during my university class, where I learned Git and other DevOps tools.
 
