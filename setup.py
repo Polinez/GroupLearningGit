@@ -10,7 +10,7 @@ version = os.getenv(
 
 setup(
     name="GroupLearningGit",
-    version="0.1.0",  # Pierwsze wydanie; zgodnie z semver
+    version=version,  # version from virtual envirement
     author="Sebastian Wandzel",
     author_email="sebastianwandzel@yahoo.pl",
     description="Aplication to menage students attendance",
@@ -21,7 +21,7 @@ setup(
     install_requires=required_packages, # requirements from requirements.txt
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "Intended Audience :: Teachers",
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.13",
