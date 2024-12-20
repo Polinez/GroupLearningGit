@@ -5,7 +5,8 @@ with open("requirements.txt") as f:
     required_packages = f.read().splitlines()
 
 version = os.getenv(
-    "VERSION", "0.0.0" # gets version from virtual envirements with is setup in deploymentCD.yml
+    "VERSION",
+    "0.0.0",  # gets version from virtual envirements with is setup in deploymentCD.yml
 )
 
 setup(
@@ -18,7 +19,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/Polinez/GroupLearningGit",
     packages=find_packages(),  # auto finding packages
-    install_requires=required_packages, # requirements from requirements.txt
+    install_requires=required_packages,  # requirements from requirements.txt
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -27,8 +28,7 @@ setup(
     python_requires=">=3.13",
     entry_points={
         "console_scripts": [
-            "menageStudents=src.task1:main", # script when someone uses menageStudents in console he can run this app
+            "menageStudents=src.task1:main",  # script when someone uses menageStudents in console he can run this app
         ]
     },
-
 )
