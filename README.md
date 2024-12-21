@@ -1,7 +1,8 @@
 # 🐍 Learning Git with Python 
 
 ![🚦 Workflow Status](https://github.com/Polinez/GroupLearningGit/actions/workflows/testyCI.yml/badge.svg)
-[![TestPyPI Version](https://img.shields.io/pypi/v/GroupLearningGit.svg)](https://test.pypi.org/project/GroupLearningGit/0.0.3/)
+[![TestPyPI](https://img.shields.io/badge/TestPyPI-GroupLearningGit-blue)](https://test.pypi.org/project/GroupLearningGit/)
+
 
 This project was created during my university class, where I learned Git and other DevOps tools.
 
@@ -26,6 +27,7 @@ In this task, I learned how to use GitHub Actions to automate various processes,
 
 ### ⚙️ CD
 In this task, I learned how to deploy my app to PyPI, including:
+- 💬 Discussing different methods for deploying code,
 - 🔑 Adding the API key to my repository,
 - 🛠️ Creating a **setup.py** file to configure deployment,
 - 🤖 creating a **deploymentCD.yml** to automate deployment process
