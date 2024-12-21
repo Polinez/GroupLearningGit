@@ -18,7 +18,10 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/Polinez/GroupLearningGit",
-    packages=find_packages(),  # auto finding packages
+    packages=find_packages(
+        include=["src.*"],
+        exclude=["tests.*"],
+    ),
     install_requires=required_packages,  # requirements from requirements.txt
     classifiers=[
         "Programming Language :: Python :: 3",
