@@ -66,6 +66,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_PYTHON_RUFF: true
           CACHE_DIR: .cache/super-linter
+          OUTPUT_DETAILS: log
 
 
       - name: "Run Ruff Formatter (Check mode)"
